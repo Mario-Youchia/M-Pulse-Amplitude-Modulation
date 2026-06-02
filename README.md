@@ -1,12 +1,12 @@
 # M-Pulse Amplitude Modulation
 
-M-Pulse Amplitude Modulation is a MATLAB and Simulink project that simulates Pulse Amplitude Modulation over an AWGN channel. The project studies M-PAM behavior for different modulation orders, with the main MATLAB implementation focused on 16-PAM, matched-filter-style receiver processing, symbol reconstruction, and SNR-versus-BER analysis.
+M-Pulse Amplitude Modulation Matlab and Simulink project simulates the Pulse Amplitude Modulation over AWGN channel. The project studies the M-PAM behaviour for different modulation orders. The main MATLAB implementation deals with 16-PAM, matched-filter style receiver processing, symbol reconstruction and SNR versus BER analysis.
 
 ## Preview
 
 ![Simulink model](public/images/projects/m-pulse-amplitude-modulation/mpam-simulink-model.png)
 
-The Simulink model represents the communication chain using random symbol generation, PAM modulation, AWGN channel modeling, matched filtering, demodulation, and error-rate calculation.
+The communication chain is represented by a Simulink model with random symbol generation, PAM modulation, AWGN channel modeling, matched filter, demodulation and error-rate calculation.
 
 ![4-PAM transmitted signal](public/images/projects/m-pulse-amplitude-modulation/mpam-4pam-transmitted-signal.png)
 
@@ -39,14 +39,12 @@ The comparison curve shows the general trend that larger PAM orders are more sen
 ## Main Features
 
 * MATLAB simulation of M-Pulse Amplitude Modulation
-* Random bit generation and bit-to-symbol grouping
-* Rectangular pulse construction for PAM symbols
 * AWGN channel modeling
 * Matched-filter-style receiver processing
 * Symbol rounding and clipping for demodulation
 * Bit reconstruction and BER calculation
 * SNR-versus-BER plotting
-* Simulink model and report for comparing PAM modulation orders
+* Simulink model
 
 ## Technical Overview
 
@@ -62,11 +60,11 @@ The Simulink model is:
 Simulink.slx
 ```
 
-The MATLAB script defines the PAM order, computes the number of bits per symbol as `log2(M)`, generates a random binary message, groups the bits into symbols, and converts each group from binary to decimal amplitude levels.
+The MATLAB script defines the order of PAM, determines the number of bits per symbol as `log2(M)`, generates a random binary message, segments the bits into symbols, and converts each group of bits from binary to decimal amplitude levels.
 
-The transmitter converts each symbol into a rectangular pulse by repeating the symbol amplitude over the pulse duration. The channel adds AWGN at different SNR values. At the receiver, the signal is divided into pulse segments, each segment is processed through a matched-filter-style convolution/energy estimate, and the resulting amplitude estimate is rounded back to the nearest PAM level.
+At the transmitter, each symbol is mapped to a rectangular pulse by repeating the symbol amplitude over the pulse interval. The channel adds AWGN of different SNR values. At the receiver, the signal is split into pulse segments, each segment is processed by a matched-filter-style convolution/energy estimate, and the resulting amplitude estimate is rounded back to the nearest PAM level.
 
-Finally, the received symbols are converted back to bits and compared against the original message to calculate the error behavior across SNR values. The report also includes Simulink-based BER curves for 2-PAM, 4-PAM, 8-PAM, and 16-PAM.
+Finally, the received symbols are converted to bits and compared with the original message to find out the error behavior as a function of SNR values. The report also includes BER curves for 2-PAM, 4-PAM, 8-PAM and 16-PAM based on Simulink.
 
 ## How to Run
 
@@ -79,10 +77,8 @@ Code
 ```
 
 4. MATLAB will generate the SNR-versus-error plot for the 16-PAM simulation.
-5. Open `Simulink.slx` in Simulink to inspect the block-diagram model used for the report simulations.
+5. Open `Simulink.slx` in Simulink to inspect the block-diagram model.
 
 ## Limitations
 
-The main MATLAB script focuses on the 16-PAM case and uses a simple matched-filter-style receiver implementation. The plotted value in the original script is based on the number of bit mismatches across the simulated message, so the result is best interpreted as an SNR-versus-error trend.
-
-The project is a course simulation and does not implement a full communications-system toolbox, coding scheme, pulse-shaping design, or optimized demodulator for deployment.
+The main MATLAB script is for the 16-PAM case and makes use of a simple receiver implementation in the style of a matched-filter. The value in the original script plotted is obtained from the number of bit mismatches over the simulated message and so the best way to read the result is as an SNR vs BER trend.
